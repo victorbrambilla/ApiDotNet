@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiDotNet.Application", "Ap
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiDotNet.Infra.IoC", "ApiDotNet.Infra.IoC\ApiDotNet.Infra.IoC.csproj", "{60018A46-FE70-4178-899F-EDF369ED5326}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiDotNet.Api", "ApiDotNet.Api\ApiDotNet.Api.csproj", "{3FF46ED6-9B6B-45FE-85D4-26F5BA79FA4D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{60018A46-FE70-4178-899F-EDF369ED5326}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60018A46-FE70-4178-899F-EDF369ED5326}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60018A46-FE70-4178-899F-EDF369ED5326}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FF46ED6-9B6B-45FE-85D4-26F5BA79FA4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FF46ED6-9B6B-45FE-85D4-26F5BA79FA4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FF46ED6-9B6B-45FE-85D4-26F5BA79FA4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FF46ED6-9B6B-45FE-85D4-26F5BA79FA4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
