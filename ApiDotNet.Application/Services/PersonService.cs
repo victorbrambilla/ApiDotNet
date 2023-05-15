@@ -38,5 +38,22 @@ namespace ApiDotNet.Application.Services
             var data = await _personRepository.CreateAsync(person);
             return ResultService.Ok<PersonDTO>(_mapper.Map<PersonDTO>(data));  
         }
+
+        public async Task<ResultService<ICollection<PersonDTO>>> GetAllAsync()
+        {
+            var data = await _personRepository.GetPeopleAsync();
+            return ResultService.Ok<ICollection<PersonDTO>>(_mapper.Map<ICollection<PersonDTO>>(data));
+        }
+
+        public async Task<ResultService<PersonDTO>> GetByIdAsync(int id)
+        {
+          var data = await _personRepository.GetByIdAsync(id);
+            if(data == null)
+            {
+                return ResultService.Fail<PersonDTO>("Pessoa não encontrada");
+            }
+    
+            return ResultService.Ok<PersonDTO>(_mapper.Map<PersonDTO>(data));
+        }
     }
 }

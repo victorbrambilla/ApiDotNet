@@ -26,5 +26,27 @@ namespace ApiDotNet.Api.Controllers
 
             return BadRequest(result);
         }
+
+        [HttpGet]
+        public async Task<ActionResult> GetAllAsync()
+        {
+            var result = await _personService.GetAllAsync();
+            if(result.IsSuccess)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetByIdAsync(int id)
+        {
+            var result = await _personService.GetByIdAsync(id);
+            if(result.IsSuccess)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
     }
 }
