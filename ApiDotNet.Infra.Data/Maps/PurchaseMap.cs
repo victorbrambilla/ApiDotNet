@@ -18,25 +18,25 @@ namespace ApiDotNet.Infra.Data.Maps
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Id)
-                .HasColumnName("IdCompra")
+                .HasColumnName("Idcompra")
                 .UseIdentityColumn();
 
             builder.Property(x => x.PersonId)
-                .HasColumnName("IdPessoa")
+                .HasColumnName("Idpessoa")
                 .UseIdentityColumn();
 
             builder.Property(x => x.ProductId)
-                .HasColumnName("IdProduto")
+                .HasColumnName("Idproduto")
                 .UseIdentityColumn();
 
             builder.Property(x => x.Date)
                 .HasColumnName("DataCompra");
 
             builder.HasOne(x => x.Person)
-                .WithMany(x => x.Purchase);
+                .WithMany(x => x.Purchases);
 
             builder.HasOne(x => x.Product)
-                .WithMany(x => x.Purchase);
+                .WithMany(x => x.Purchases);
         }
     }
 }

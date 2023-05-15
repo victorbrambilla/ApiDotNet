@@ -14,11 +14,11 @@ namespace ApiDotNet.Domain.Entities
             public string Name { get; private set; }
             public string Document {get; private set; }
             public string Phone { get; private set; }
-            public ICollection<Purchase> Purchase { get; set; }
+            public ICollection<Purchase> Purchases { get; set; }
             public Person(string document, string name, string phone) 
             {
-                   Validation(document, name, phone); 
-                          
+                Validation(document, name, phone);
+                Purchases = new List<Purchase>();
             }
 
             public Person(int id, string document, string name, string phone)
@@ -26,9 +26,11 @@ namespace ApiDotNet.Domain.Entities
                 DomainValidationException.When(id < 0, "Id inválido");
                 Id = id;
                 Validation(document, name, phone);
+                Purchases = new List<Purchase>();
 
-            }
-            private void Validation(string document, string name, string phone)
+
+        }
+        private void Validation(string document, string name, string phone)
             {
                 DomainValidationException.When(string.IsNullOrEmpty(document), "Documento deve ser informado!");
                 DomainValidationException.When(string.IsNullOrEmpty(name), "Nome deve ser informado!");

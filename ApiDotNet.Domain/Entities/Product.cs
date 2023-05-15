@@ -13,11 +13,12 @@ namespace ApiDotNet.Domain.Entities
         public string Name { get; private set; }
         public string CodErp { get; private set; }
         public decimal Price { get; private set; }
-        public ICollection<Purchase> Purchase { get; set; }
+        public ICollection<Purchase> Purchases { get; set; }
 
         public Product(string name, string codErp, decimal price) 
         { 
             Validation(name, codErp, price);
+            Purchases = new List<Purchase>();
         }
 
         public Product(int id, string name, string codErp, decimal price)
@@ -25,6 +26,8 @@ namespace ApiDotNet.Domain.Entities
             DomainValidationException.When(id < 0, "O Id deve ser informado");
             Id = id;
             Validation(name, codErp, price);
+            Purchases = new List<Purchase>();
+
         }
 
         private void Validation(string name, string codeErp, decimal price)

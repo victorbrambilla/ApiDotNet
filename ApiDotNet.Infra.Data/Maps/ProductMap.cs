@@ -18,11 +18,11 @@ namespace ApiDotNet.Infra.Data.Maps
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Id)
-                .HasColumnName("IdProduto")
+                .HasColumnName("Idproduto")
                 .UseIdentityColumn();
 
             builder.Property(x => x.CodErp)
-                .HasColumnName("CodErp");
+                .HasColumnName("Coderp");
 
             builder.Property(x => x.Name)
               .HasColumnName("Nome");
@@ -30,7 +30,7 @@ namespace ApiDotNet.Infra.Data.Maps
             builder.Property(x => x.Price)
               .HasColumnName("Preco");
 
-            builder.HasMany(x => x.Purchase)
+            builder.HasMany(x => x.Purchases)
                 .WithOne(x => x.Product)
                 .HasForeignKey(x => x.ProductId);
         }

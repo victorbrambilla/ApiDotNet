@@ -18,7 +18,7 @@ namespace ApiDotNet.Infra.Data.Maps
             builder.HasKey(c => c.Id);
 
             builder.Property(c=> c.Id)
-                .HasColumnName("IdPessoa")
+                .HasColumnName("Idpessoa")
                 .UseIdentityColumn();
 
             builder.Property(c => c.Name)
@@ -30,7 +30,7 @@ namespace ApiDotNet.Infra.Data.Maps
             builder.Property(c => c.Phone)
                 .HasColumnName("Celular");
 
-            builder.HasMany(c => c.Purchase)
+            builder.HasMany(c => c.Purchases)
                 .WithOne(c => c.Person)
                 .HasForeignKey(c => c.PersonId);
 
