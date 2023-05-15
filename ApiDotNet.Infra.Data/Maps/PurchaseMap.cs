@@ -13,24 +13,24 @@ namespace ApiDotNet.Infra.Data.Maps
     {
         public void Configure(EntityTypeBuilder<Purchase> builder)
         {
-            builder.ToTable("Compra");
+            builder.ToTable("compra");
 
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Id)
-                .HasColumnName("Idcompra")
+                .HasColumnName("idcompra")
                 .UseIdentityColumn();
 
             builder.Property(x => x.PersonId)
-                .HasColumnName("Idpessoa")
+                .HasColumnName("idpessoa")
                 .UseIdentityColumn();
 
             builder.Property(x => x.ProductId)
-                .HasColumnName("Idproduto")
+                .HasColumnName("idproduto")
                 .UseIdentityColumn();
 
             builder.Property(x => x.Date)
-                .HasColumnName("DataCompra");
+                .HasColumnName("datacompra");
 
             builder.HasOne(x => x.Person)
                 .WithMany(x => x.Purchases);
