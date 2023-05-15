@@ -13,7 +13,6 @@ namespace ApiDotNet.Application.Mappings
     {
         public DomainToDTOMapping() {
             CreateMap<Person, PersonDTO>();
-
         }
     }
 }
