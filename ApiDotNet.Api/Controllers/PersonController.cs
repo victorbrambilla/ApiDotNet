@@ -48,5 +48,27 @@ namespace ApiDotNet.Api.Controllers
             }
             return BadRequest(result);
         }
+
+        [HttpPut]
+        public async Task<ActionResult> Put([FromBody] PersonDTO personDTO)
+        {
+            var result = await _personService.UpdateAsync(personDTO);
+            if(result.IsSuccess)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var result = await _personService.DeleteAsync(id);
+            if(result.IsSuccess)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
     }
 }
