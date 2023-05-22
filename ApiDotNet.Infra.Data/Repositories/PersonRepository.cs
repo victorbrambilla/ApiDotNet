@@ -2,21 +2,18 @@
 using ApiDotNet.Domain.Repositories;
 using ApiDotNet.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApiDotNet.Infra.Data.Repositories
 {
     public class PersonRepository : IPersonRepository
     {
         private readonly ApplicationDbContext _db;
+
         public PersonRepository(ApplicationDbContext db)
         {
             _db = db;
         }
+
         public async Task<Person> CreateAsync(Person person)
         {
             _db.Add(person);
@@ -28,8 +25,6 @@ namespace ApiDotNet.Infra.Data.Repositories
         {
             _db.Remove(person);
             await _db.SaveChangesAsync();
-           
-
         }
 
         public async Task<Person> GetByIdAsync(int id)
@@ -44,7 +39,7 @@ namespace ApiDotNet.Infra.Data.Repositories
 
         public async Task UpdateAsync(Person person)
         {
-             _db.Update(person);
+            _db.Update(person);
             await _db.SaveChangesAsync();
         }
     }

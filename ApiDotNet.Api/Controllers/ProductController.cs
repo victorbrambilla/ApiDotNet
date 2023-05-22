@@ -1,6 +1,5 @@
 ﻿using ApiDotNet.Application.DTOs;
 using ApiDotNet.Application.Services.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiDotNet.Api.Controllers
@@ -20,7 +19,51 @@ namespace ApiDotNet.Api.Controllers
         public async Task<ActionResult> Post([FromBody] ProductDTO productDTO)
         {
             var result = await _productService.CreateAsync(productDTO);
-            if(result.IsSuccess)
+            if (result.IsSuccess)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetAllAsync()
+        {
+            var result = await _productService.GetAllAsync();
+            if (result.IsSuccess)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetByIdAsync(int id)
+        {
+            var result = await _productService.GetByIdAsync(id);
+            if (result.IsSuccess)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> Put([FromBody] ProductDTO productDTO)
+        {
+            var result = await _productService.UpdateAsync(productDTO);
+            if (result.IsSuccess)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var result = await _productService.DeleteAsync(id);
+            if (result.IsSuccess)
             {
                 return Ok(result);
             }
