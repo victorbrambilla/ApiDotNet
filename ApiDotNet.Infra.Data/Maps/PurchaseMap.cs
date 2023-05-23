@@ -30,6 +30,7 @@ namespace ApiDotNet.Infra.Data.Maps
                 .UseIdentityColumn();
 
             builder.Property(x => x.Date)
+                .HasColumnType("date")
                 .HasColumnName("datacompra");
 
             builder.HasOne(x => x.Person)

@@ -11,6 +11,7 @@ namespace ApiDotNet.Application.Services
     {
         private readonly IMapper _mapper;
         private readonly IProductRepository _productRepository;
+
         public ProductService(IProductRepository productRepository, IMapper mapper)
         {
             _mapper = mapper;

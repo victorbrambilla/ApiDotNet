@@ -26,15 +26,22 @@ namespace ApiDotNet.Domain.Entities
 
         public Purchase(int id, int productId, int personId)
         {
-            DomainValidationException.When(id < 0, "O id deve ser informado");
+            DomainValidationException.When(id <= 0, "O id deve ser informado");
+            Id = id;
+            Validation(productId, personId);
+        }
+
+        public void Edit(int id, int productId, int personId)
+        {
+            DomainValidationException.When(id <= 0, "O id deve ser informado");
             Id = id;
             Validation(productId, personId);
         }
 
         private void Validation(int productId, int personId)
         {
-            DomainValidationException.When(productId < 0, "Produto deve ser informado");
-            DomainValidationException.When(personId < 0, "Código erp deve ser informado");
+            DomainValidationException.When(productId <= 0, "Produto deve ser informado");
+            DomainValidationException.When(personId <= 0, "Código erp deve ser informado");
 
             ProductId = productId;
             PersonId = personId;

@@ -14,6 +14,11 @@ namespace ApiDotNet.Application.Mappings
         public DomainToDTOMapping() {
             CreateMap<Person, PersonDTO>();
             CreateMap<Product, ProductDTO>();
+            CreateMap<Purchase, PurchaseDTO>();
+            CreateMap<Purchase, PurchaseDetailDTO>()
+                .ForMember(dest => dest.Person, opt => opt.MapFrom(src => src.Person.Name))
+                .ForMember(dest => dest.Product, opt => opt.MapFrom(src => src.Product.Name));
+                
         }
     }
 }

@@ -13,5 +13,6 @@ namespace ApiDotNet.Domain.Repositories
         Task UpdateAsync(Person person);
 
         Task DeleteAsync(Person person);
+        Task<int> GetIdByDocumentAsync (string document);
     }
 }
