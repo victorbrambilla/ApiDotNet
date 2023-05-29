@@ -1,5 +1,6 @@
 ﻿using ApiDotNet.Application.DTOs;
 using ApiDotNet.Application.Services.Interfaces;
+using ApiDotNet.Domain.FiltersDb;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiDotNet.Api.Controllers
@@ -70,5 +71,17 @@ namespace ApiDotNet.Api.Controllers
             }
             return BadRequest(result);
         }
+
+        [HttpGet("paged")]
+        public async Task<ActionResult> GetPagedAsync([FromQuery] PersonFilterDb personFilterDb)
+        {
+            var result = await _personService.GetPagedAsync(personFilterDb);
+            if(result.IsSuccess)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
     }
 }

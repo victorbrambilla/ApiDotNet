@@ -2,6 +2,7 @@
 using ApiDotNet.Application.DTOs.Validations;
 using ApiDotNet.Application.Services.Interfaces;
 using ApiDotNet.Domain.Entities;
+using ApiDotNet.Domain.FiltersDb;
 using ApiDotNet.Domain.Repositories;
 using AutoMapper;
 
@@ -61,6 +62,13 @@ namespace ApiDotNet.Application.Services
             }
 
             return ResultService.Ok<PersonDTO>(_mapper.Map<PersonDTO>(data));
+        }
+
+        public async Task<ResultService<PagedBaseResponseDTO<PersonDTO>>> GetPagedAsync(PersonFilterDb personFilterDb)
+        {
+            var peoplePaged = await _personRepository.GetPagedAsync(personFilterDb);
+            var result = new PagedBaseResponseDTO<PersonDTO>(peoplePaged.TotalRegisters, _mapper.Map<List<PersonDTO>> (peoplePaged.Result));
+            return ResultService.Ok(result);
         }
 
         public async Task<ResultService> UpdateAsync(PersonDTO personDTO)
