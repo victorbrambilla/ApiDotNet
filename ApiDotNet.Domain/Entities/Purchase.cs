@@ -41,7 +41,7 @@ namespace ApiDotNet.Domain.Entities
         private void Validation(int productId, int personId)
         {
             DomainValidationException.When(productId <= 0, "Produto deve ser informado");
-            DomainValidationException.When(personId <= 0, "Código erp deve ser informado");
+            DomainValidationException.When(personId <= 0, "Pessoa não existe");
 
             ProductId = productId;
             PersonId = personId;
