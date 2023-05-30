@@ -24,6 +24,8 @@ namespace ApiDotNet.Infra.IoC
             services.AddScoped<IPersonRepository, PersonRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IPurchaseRepository, PurchaseRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             return services;
         }         
 
