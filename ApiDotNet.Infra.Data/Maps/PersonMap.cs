@@ -1,11 +1,6 @@
 ﻿using ApiDotNet.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApiDotNet.Infra.Data.Maps
 {
@@ -17,7 +12,7 @@ namespace ApiDotNet.Infra.Data.Maps
 
             builder.HasKey(c => c.Id);
 
-            builder.Property(c=> c.Id)
+            builder.Property(c => c.Id)
                 .HasColumnName("idpessoa")
                 .UseIdentityColumn();
 
@@ -33,7 +28,6 @@ namespace ApiDotNet.Infra.Data.Maps
             builder.HasMany(c => c.Purchases)
                 .WithOne(c => c.Person)
                 .HasForeignKey(c => c.PersonId);
-
         }
     }
 }

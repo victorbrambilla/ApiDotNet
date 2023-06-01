@@ -1,10 +1,5 @@
 ﻿using ApiDotNet.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApiDotNet.Infra.Data.Repositories
 {
@@ -16,24 +11,23 @@ namespace ApiDotNet.Infra.Data.Repositories
             var response = new TResponse();
             response.TotalRegisters = await query.CountAsync();
             response.TotalPages = (int)Math.Ceiling((double)response.TotalRegisters / request.PageSize);
-            if(string.IsNullOrEmpty(request.OrderBy))
+            if (string.IsNullOrEmpty(request.OrderBy))
             {
                 response.Result = await query.ToListAsync();
             }
             else
             {
-                response.Result =  query.OrderByDynamic(request.OrderBy)
+                response.Result = query.OrderByDynamic(request.OrderBy)
                                         .Skip((request.Page - 1) * request.PageSize)
                                         .Take(request.PageSize)
-                                        .ToList();      
+                                        .ToList();
             }
             return response;
         }
+
         private static IEnumerable<T> OrderByDynamic<T>(this IEnumerable<T> query, string propertyName)
         {
             return query.OrderBy(x => x.GetType().GetProperty(propertyName).GetValue(x, null));
         }
     }
-
-   
 }

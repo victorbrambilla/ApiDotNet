@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ApiDotNet.Application.DTOs
+﻿namespace ApiDotNet.Application.DTOs
 {
     public class PagedBaseResponseDTO<T>
     {
@@ -15,8 +9,6 @@ namespace ApiDotNet.Application.DTOs
         }
 
         public int TotalRegisters { get; set; }
-        public  List<T> Resuts { get; set; }
-
-       
+        public List<T> Resuts { get; set; }
     }
 }

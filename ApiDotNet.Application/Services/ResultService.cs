@@ -1,9 +1,4 @@
 ﻿using FluentValidation.Results;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApiDotNet.Application.Services
 {
@@ -68,15 +63,14 @@ namespace ApiDotNet.Application.Services
             };
         }
 
-        public static ResultService<T> Ok<T>( T data)
+        public static ResultService<T> Ok<T>(T data)
         {
             return new ResultService<T>
             {
                 IsSuccess = true,
                 Data = data
             };
-        }   
-       
+        }
     }
 
     public class ResultService<T> : ResultService

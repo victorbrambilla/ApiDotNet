@@ -1,11 +1,4 @@
 ﻿using ApiDotNet.Domain.Validation;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace ApiDotNet.Domain.Entities
 {
@@ -14,14 +7,14 @@ namespace ApiDotNet.Domain.Entities
         public int Id { get; private set; }
         public int ProductId { get; private set; }
         public int PersonId { get; private set; }
-        public DateTime Date { get ; private set; }
+        public DateTime Date { get; private set; }
 
         public Person Person { get; set; }
         public Product Product { get; set; }
 
-        public Purchase(int productId, int personId) 
+        public Purchase(int productId, int personId)
         {
-            Validation(productId, personId);  
+            Validation(productId, personId);
         }
 
         public Purchase(int id, int productId, int personId)
@@ -46,7 +39,6 @@ namespace ApiDotNet.Domain.Entities
             ProductId = productId;
             PersonId = personId;
             Date = DateTime.Now;
-
         }
     }
 }

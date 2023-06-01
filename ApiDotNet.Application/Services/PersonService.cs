@@ -12,6 +12,7 @@ namespace ApiDotNet.Application.Services
     {
         private readonly IMapper _mapper;
         private readonly IPersonRepository _personRepository;
+
         public PersonService(IPersonRepository personRepository, IMapper mapper)
         {
             _mapper = mapper;
@@ -67,7 +68,7 @@ namespace ApiDotNet.Application.Services
         public async Task<ResultService<PagedBaseResponseDTO<PersonDTO>>> GetPagedAsync(PersonFilterDb personFilterDb)
         {
             var peoplePaged = await _personRepository.GetPagedAsync(personFilterDb);
-            var result = new PagedBaseResponseDTO<PersonDTO>(peoplePaged.TotalRegisters, _mapper.Map<List<PersonDTO>> (peoplePaged.Result));
+            var result = new PagedBaseResponseDTO<PersonDTO>(peoplePaged.TotalRegisters, _mapper.Map<List<PersonDTO>>(peoplePaged.Result));
             return ResultService.Ok(result);
         }
 

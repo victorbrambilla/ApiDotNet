@@ -13,6 +13,7 @@ namespace ApiDotNet.Domain.Repositories
         Task UpdateAsync(Product product);
 
         Task DeleteAsync(Product product);
-        Task<int> GetIdByCodErpAsync (string codErp);
+
+        Task<int> GetIdByCodErpAsync(string codErp);
     }
 }

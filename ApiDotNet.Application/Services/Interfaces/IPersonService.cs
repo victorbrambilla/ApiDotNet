@@ -1,6 +1,5 @@
 ﻿using ApiDotNet.Application.DTOs;
 using ApiDotNet.Domain.FiltersDb;
-using ApiDotNet.Domain.Repositories;
 
 namespace ApiDotNet.Application.Services.Interfaces
 {

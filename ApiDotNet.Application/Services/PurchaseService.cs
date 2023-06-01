@@ -14,7 +14,6 @@ namespace ApiDotNet.Application.Services
         private readonly IPersonRepository _personRepository;
         private readonly IPurchaseRepository _purchaseRepository;
         private readonly IUnitOfWork _unitOfWork;
- 
 
         public PurchaseService(IProductRepository productRepository, IPersonRepository personRepository, IPurchaseRepository purchaseRepository, IMapper mapper, IUnitOfWork unitOfWork)
         {
@@ -23,7 +22,6 @@ namespace ApiDotNet.Application.Services
             _personRepository = personRepository;
             _purchaseRepository = purchaseRepository;
             _unitOfWork = unitOfWork;
-
         }
 
         public async Task<ResultService<PurchaseDTO>> CreateAsync(PurchaseDTO purchaseDTO)
@@ -49,7 +47,7 @@ namespace ApiDotNet.Application.Services
                     productId = product.Id;
                 }
                 var personId = await _personRepository.GetIdByDocumentAsync(purchaseDTO.Document);
-            
+
                 var purchase = new Purchase(productId, personId);
 
                 var data = await _purchaseRepository.CreateAsync(purchase);
@@ -57,13 +55,11 @@ namespace ApiDotNet.Application.Services
                 await _unitOfWork.Commit();
                 return ResultService.Ok<PurchaseDTO>(purchaseDTO);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-               await _unitOfWork.Rollback();
-               return ResultService.Fail<PurchaseDTO>($"Erro ao salvar compra: {ex.Message}");
+                await _unitOfWork.Rollback();
+                return ResultService.Fail<PurchaseDTO>($"Erro ao salvar compra: {ex.Message}");
             }
-
-           
         }
 
         public async Task<ResultService> DeleteAsync(int id)
@@ -90,7 +86,7 @@ namespace ApiDotNet.Application.Services
             {
                 return ResultService.Fail<PurchaseDetailDTO>("Compra não encontrada");
             }
-            return ResultService.Ok<PurchaseDetailDTO>(_mapper.Map<Purchase,PurchaseDetailDTO>(purchase));
+            return ResultService.Ok<PurchaseDetailDTO>(_mapper.Map<Purchase, PurchaseDetailDTO>(purchase));
         }
 
         public async Task<ResultService<ICollection<PurchaseDetailDTO>>> GetByPersonIdAsync(int personId)

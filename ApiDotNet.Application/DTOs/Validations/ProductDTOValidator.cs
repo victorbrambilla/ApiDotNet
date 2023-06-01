@@ -1,9 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ApiDotNet.Application.DTOs.Validations
 {
@@ -19,8 +14,6 @@ namespace ApiDotNet.Application.DTOs.Validations
             RuleFor(x => x.Price)
                .GreaterThan(0)
                 .WithMessage("O campo {PropertyName} precisa ser maior que 0");
-
         }
-    }  
-    
+    }
 }

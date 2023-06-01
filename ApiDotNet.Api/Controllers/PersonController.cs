@@ -20,7 +20,7 @@ namespace ApiDotNet.Api.Controllers
         public async Task<ActionResult> Post([FromBody] PersonDTO personDTO)
         {
             var result = await _personService.CreateAsync(personDTO);
-            if(result.IsSuccess)
+            if (result.IsSuccess)
             {
                 return Ok(result);
             }
@@ -32,7 +32,7 @@ namespace ApiDotNet.Api.Controllers
         public async Task<ActionResult> GetAllAsync()
         {
             var result = await _personService.GetAllAsync();
-            if(result.IsSuccess)
+            if (result.IsSuccess)
             {
                 return Ok(result);
             }
@@ -43,7 +43,7 @@ namespace ApiDotNet.Api.Controllers
         public async Task<ActionResult> GetByIdAsync(int id)
         {
             var result = await _personService.GetByIdAsync(id);
-            if(result.IsSuccess)
+            if (result.IsSuccess)
             {
                 return Ok(result);
             }
@@ -54,7 +54,7 @@ namespace ApiDotNet.Api.Controllers
         public async Task<ActionResult> Put([FromBody] PersonDTO personDTO)
         {
             var result = await _personService.UpdateAsync(personDTO);
-            if(result.IsSuccess)
+            if (result.IsSuccess)
             {
                 return Ok(result);
             }
@@ -65,7 +65,7 @@ namespace ApiDotNet.Api.Controllers
         public async Task<ActionResult> Delete(int id)
         {
             var result = await _personService.DeleteAsync(id);
-            if(result.IsSuccess)
+            if (result.IsSuccess)
             {
                 return Ok(result);
             }
@@ -76,12 +76,11 @@ namespace ApiDotNet.Api.Controllers
         public async Task<ActionResult> GetPagedAsync([FromQuery] PersonFilterDb personFilterDb)
         {
             var result = await _personService.GetPagedAsync(personFilterDb);
-            if(result.IsSuccess)
+            if (result.IsSuccess)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-
     }
 }
