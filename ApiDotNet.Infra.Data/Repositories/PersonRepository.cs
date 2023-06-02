@@ -41,8 +41,6 @@ namespace ApiDotNet.Infra.Data.Repositories
         public async Task<PagedBaseResponse<Person>> GetPagedAsync(PersonFilterDb request)
         {
             var people = _db.People.AsQueryable();
-            // print the name
-            System.Console.WriteLine(!string.IsNullOrEmpty(request.Name));
 
             if (!string.IsNullOrEmpty(request.Name))
                 people = people.Where(x => x.Name.ToLower().Contains(request.Name.ToLower()));

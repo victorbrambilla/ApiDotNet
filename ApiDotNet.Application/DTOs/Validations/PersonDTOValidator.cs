@@ -15,6 +15,10 @@ namespace ApiDotNet.Application.DTOs.Validations
             RuleFor(x => x.Phone)
                 .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
                 .Length(11).WithMessage("O campo {PropertyName} precisa ter {MaxLength} caracteres");
+
+            RuleFor(x => x.UserId)
+                .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
+                .GreaterThan(0).WithMessage("O campo {PropertyName} precisa ser maior que {ComparisonValue}");
         }
     }
 }

@@ -12,11 +12,13 @@ namespace ApiDotNet.Application.Services
     {
         private readonly IMapper _mapper;
         private readonly IPersonRepository _personRepository;
+        private readonly IUserRepository _userRepository;
 
-        public PersonService(IPersonRepository personRepository, IMapper mapper)
+        public PersonService(IPersonRepository personRepository, IMapper mapper, IUserRepository userRepository)
         {
             _mapper = mapper;
             _personRepository = personRepository;
+            _userRepository = userRepository;
         }
 
         public async Task<ResultService<PersonDTO>> CreateAsync(PersonDTO personDTO)
@@ -30,6 +32,12 @@ namespace ApiDotNet.Application.Services
             if (!result.IsValid)
             {
                 return ResultService.RequestError<PersonDTO>("Problemas de validação!", result);
+            }
+
+            var user = await _userRepository.GetUserByIdAsync(personDTO.UserId);
+            if (user == null)
+            {
+                return ResultService.Fail<PersonDTO>("Usuário não encontrado");
             }
 
             var person = _mapper.Map<Person>(personDTO);

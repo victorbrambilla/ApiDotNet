@@ -25,5 +25,10 @@ namespace ApiDotNet.Infra.Data.Repositories
         {
             return await _db.Users.FirstOrDefaultAsync(u => u.Email == email);
         }
+
+        public async Task<User> GetUserByIdAsync(int id)
+        {
+            return await _db.Users.FirstOrDefaultAsync(u => u.Id == id);
+        }
     }
 }

@@ -23,7 +23,7 @@ namespace ApiDotNet.Infra.IoC
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ITokenGenerator, TokenGenerator>();
-
+            services.AddScoped<IHashing,Hashing>();
             return services;
         }
 

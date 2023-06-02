@@ -19,6 +19,8 @@ namespace ApiDotNet.Domain.Entities
         public int Id { get; private set; }
         public string Email { get; private set; }
         public string Password { get; private set; }
+        public int? PersonId { get; private set; }
+        public Person?  Person { get; private set; }
 
         private void Validation(string email, string password)
         {

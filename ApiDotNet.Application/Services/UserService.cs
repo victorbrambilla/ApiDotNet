@@ -12,14 +12,15 @@ namespace ApiDotNet.Application.Services
     {
         private readonly IUserRepository _userRepository;
         private readonly ITokenGenerator _tokenGenerator;
+        private readonly IHashing _hashing;
         private readonly IMapper _mapper;
 
-        public UserService(IUserRepository userRepository, ITokenGenerator tokenGenerator, IMapper mapper)
+        public UserService(IUserRepository userRepository, ITokenGenerator tokenGenerator, IMapper mapper, IHashing hashing)
         {
             this._userRepository = userRepository;
             this._tokenGenerator = tokenGenerator;
             this._mapper = mapper;
-
+            _hashing = hashing;
         }
 
         public async Task<ResultService<UserDTO>> CreateUserAsync(UserDTO userDTO)
@@ -39,12 +40,13 @@ namespace ApiDotNet.Application.Services
             if (user != null)
             {
                 return ResultService.Fail<UserDTO>("Usuário já cadastrado!");
-            }   
+            }
 
+            userDTO.Password = _hashing.UseArgon2(userDTO.Password);
             var userCreated = _mapper.Map<User>(userDTO);
+
             var data = await _userRepository.CreateUser(userCreated);
             return ResultService.Ok<UserDTO>(_mapper.Map<UserDTO>(data));
-
         }
 
         public async Task<ResultService<dynamic>> GenerateTokenAsync(UserDTO userDTO)
@@ -59,6 +61,11 @@ namespace ApiDotNet.Application.Services
             var user = await _userRepository.GetUserByEmailAsync(userDTO.Email);
             if (user == null)
                 return ResultService.Fail<dynamic>("Usuário não encontrado!");
+
+            var verifyPassword = _hashing.VerifyArgon2(user.Password, userDTO.Password);
+            if (!verifyPassword)
+                return ResultService.Fail<dynamic>("Senha inválida!");
+
 
             return ResultService.Ok<dynamic>(_tokenGenerator.Generator(user));
         }

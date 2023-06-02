@@ -25,9 +25,16 @@ namespace ApiDotNet.Infra.Data.Maps
             builder.Property(c => c.Phone)
                 .HasColumnName("celular");
 
+            builder.Property(c => c.UserId)
+                .HasColumnName("idusuario");
+
             builder.HasMany(c => c.Purchases)
                 .WithOne(c => c.Person)
                 .HasForeignKey(c => c.PersonId);
+
+            builder.HasOne(c => c.User)
+              .WithOne(c => c.Person)
+              .HasForeignKey<User>(c => c.PersonId);
         }
     }
 }
