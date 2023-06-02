@@ -27,13 +27,14 @@ namespace ApiDotNet.Infra.IoC
             return services;
         }
 
-        public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddServices(this IServiceCollection services, ConfigurationManager configuration)
         {
             services.AddAutoMapper(typeof(DomainToDTOMapping));
             services.AddScoped<IPersonService, PersonService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IPurchaseService, PurchaseService>();
             services.AddScoped<IUserService, UserService>();
+
             return services;
         }
     }
