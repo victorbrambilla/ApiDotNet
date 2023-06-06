@@ -27,6 +27,10 @@ namespace ApiDotNet.Infra.Data.Maps
             builder.HasOne(x => x.Person)
                 .WithOne(x => x.User)
                 .HasForeignKey<Person>(x => x.UserId);
+
+            builder.HasMany(x => x.UserPermissions)
+                .WithOne(x => x.User)
+                .HasForeignKey(x => x.UserId);
         }
     }
 }

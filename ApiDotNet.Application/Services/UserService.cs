@@ -66,7 +66,6 @@ namespace ApiDotNet.Application.Services
             if (!verifyPassword)
                 return ResultService.Fail<dynamic>("Senha inválida!");
 
-
             return ResultService.Ok<dynamic>(_tokenGenerator.Generator(user));
         }
     }

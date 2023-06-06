@@ -14,6 +14,10 @@ namespace ApiDotNet.Infra.Data.Context
 
         public DbSet<User> Users { get; set; }
 
+        public DbSet<UserPermission> UserPermissions { get; set; }
+
+        public DbSet<Permission> Permissions { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

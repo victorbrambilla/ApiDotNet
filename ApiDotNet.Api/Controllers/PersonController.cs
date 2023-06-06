@@ -1,5 +1,6 @@
 ﻿using ApiDotNet.Application.DTOs;
 using ApiDotNet.Application.Services.Interfaces;
+using ApiDotNet.Domain.Authentication;
 using ApiDotNet.Domain.FiltersDb;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,13 +8,18 @@ namespace ApiDotNet.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PersonController : ControllerBase
+    public class PersonController : BaseController
     {
         private readonly IPersonService _personService;
+        private readonly ICurrentUser _currentUser;
+        private List<string> _permissionsNeeded = new List<string>() { "Admin" };
+        private readonly List<string> _permissionsUser;
 
-        public PersonController(IPersonService personService)
+        public PersonController(IPersonService personService, ICurrentUser currentUser)
         {
             _personService = personService;
+            _currentUser = currentUser;
+            _permissionsUser = _currentUser.Permissions?.Split(",").ToList() ?? new List<string>();
         }
 
         [HttpPost]
@@ -73,8 +79,13 @@ namespace ApiDotNet.Api.Controllers
         }
 
         [HttpGet("paged")]
-        public async Task<ActionResult> GetPagedAsync([FromQuery] PersonFilterDb personFilterDb)
+        public async Task<IActionResult> GetPagedAsync([FromQuery] PersonFilterDb personFilterDb)
         {
+            _permissionsNeeded.Add("Admin");
+            if (!ValidateUserPermissions(_permissionsUser, _permissionsNeeded))
+            {
+                return Forbidden();
+            }
             var result = await _personService.GetPagedAsync(personFilterDb);
             if (result.IsSuccess)
             {

@@ -11,10 +11,12 @@ namespace ApiDotNet.Infra.Data.Authentication
     {
         public dynamic Generator(User user)
         {
+            var permission = string.Join(",", user.UserPermissions.Select(p => p.Permission.PermissionName).ToArray());
             var claims = new List<Claim>
             {
                 new Claim("Email", user.Email),
-                new Claim("Id", user.Id.ToString())
+                new Claim("Id", user.Id.ToString()),
+                new Claim("Permissions", permission)
             };
 
             var expires = DateTime.UtcNow.AddDays(1);
