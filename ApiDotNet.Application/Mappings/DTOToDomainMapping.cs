@@ -12,6 +12,7 @@ namespace ApiDotNet.Application.Mappings
             CreateMap<ProductDTO, Product>();
             CreateMap<PurchaseDTO, Purchase>();
             CreateMap<UserDTO, User>();
+            CreateMap<PermissionDTO, Permission>();
         }
     }
 }

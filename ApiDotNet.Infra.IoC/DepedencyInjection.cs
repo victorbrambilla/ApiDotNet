@@ -21,9 +21,10 @@ namespace ApiDotNet.Infra.IoC
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IPurchaseRepository, PurchaseRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPermissionRepository, PermissionRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ITokenGenerator, TokenGenerator>();
-            services.AddScoped<IHashing,Hashing>();
+            services.AddScoped<IHashing, Hashing>();
             return services;
         }
 
@@ -34,6 +35,7 @@ namespace ApiDotNet.Infra.IoC
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IPurchaseService, PurchaseService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IPermissionService, PermissionService>();
 
             return services;
         }

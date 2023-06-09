@@ -1,48 +1,49 @@
 ﻿using ApiDotNet.Application.DTOs;
 using ApiDotNet.Application.Services.Interfaces;
 using ApiDotNet.Domain.Authentication;
-using ApiDotNet.Domain.FiltersDb;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiDotNet.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PersonController : BaseController
+    public class PermissionController : BaseController
     {
-        private readonly IPersonService _personService;
+        private readonly IPermissionService _permissionService;
         private readonly ICurrentUser _currentUser;
         private List<string> _permissionsNeeded = new List<string>() { "Admin" };
         private readonly List<string> _permissionsUser;
 
-        public PersonController(IPersonService personService, ICurrentUser currentUser)
+        public PermissionController(IPermissionService permissionService, ICurrentUser currentUser)
         {
-            _personService = personService;
+            _permissionService = permissionService;
             _currentUser = currentUser;
             _permissionsUser = _currentUser.Permissions?.Split(",").ToList() ?? new List<string>();
         }
 
         [HttpPost]
-        public async Task<ActionResult> Post([FromBody] PersonDTO personDTO)
+        public async Task<IActionResult> Post([FromBody] PermissionDTO permissionDTO)
         {
-            var result = await _personService.CreateAsync(personDTO);
+            if (!ValidateUserPermissions(_permissionsUser, _permissionsNeeded))
+            {
+                return Forbidden();
+            }
+            var result = await _permissionService.CreateAsync(permissionDTO);
             if (result.IsSuccess)
             {
                 return Ok(result);
             }
-
             return BadRequest(result);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {
-            _permissionsNeeded.Add("Admin");
             if (!ValidateUserPermissions(_permissionsUser, _permissionsNeeded))
             {
                 return Forbidden();
             }
-            var result = await _personService.GetAllAsync();
+            var result = await _permissionService.GetAllAsync();
             if (result.IsSuccess)
             {
                 return Ok(result);
@@ -51,9 +52,13 @@ namespace ApiDotNet.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetByIdAsync(int id)
+        public async Task<IActionResult> GetByIdAsync(int id)
         {
-            var result = await _personService.GetByIdAsync(id);
+            if (!ValidateUserPermissions(_permissionsUser, _permissionsNeeded))
+            {
+                return Forbidden();
+            }
+            var result = await _permissionService.GetByIdAsync(id);
             if (result.IsSuccess)
             {
                 return Ok(result);
@@ -62,9 +67,13 @@ namespace ApiDotNet.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> Put([FromBody] PersonDTO personDTO)
+        public async Task<IActionResult> PutAsync([FromBody] PermissionDTO permissionDTO)
         {
-            var result = await _personService.UpdateAsync(personDTO);
+            if (!ValidateUserPermissions(_permissionsUser, _permissionsNeeded))
+            {
+                return Forbidden();
+            }
+            var result = await _permissionService.UpdateAsync(permissionDTO);
             if (result.IsSuccess)
             {
                 return Ok(result);
@@ -73,25 +82,13 @@ namespace ApiDotNet.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteAsync(int id)
         {
-            var result = await _personService.DeleteAsync(id);
-            if (result.IsSuccess)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-
-        [HttpGet("paged")]
-        public async Task<IActionResult> GetPagedAsync([FromQuery] PersonFilterDb personFilterDb)
-        {
-            _permissionsNeeded.Add("Admin");
             if (!ValidateUserPermissions(_permissionsUser, _permissionsNeeded))
             {
                 return Forbidden();
             }
-            var result = await _personService.GetPagedAsync(personFilterDb);
+            var result = await _permissionService.DeleteAsync(id);
             if (result.IsSuccess)
             {
                 return Ok(result);

@@ -15,6 +15,7 @@ namespace ApiDotNet.Application.Mappings
                 .ForMember(dest => dest.Person, opt => opt.MapFrom(src => src.Person.Name))
                 .ForMember(dest => dest.Product, opt => opt.MapFrom(src => src.Product.Name));
             CreateMap<User, UserDTO>();
+            CreateMap<Permission, PermissionDTO>();
         }
     }
 }
