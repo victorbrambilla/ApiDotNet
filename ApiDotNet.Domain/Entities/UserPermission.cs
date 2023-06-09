@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace ApiDotNet.Domain.Entities
@@ -19,6 +20,7 @@ namespace ApiDotNet.Domain.Entities
         public int PermissionId { get; set; }
 
         public User User { get; set; }
+
         public Permission Permission { get; set; }
 
         private void Validation(int userId, int permissionId)
