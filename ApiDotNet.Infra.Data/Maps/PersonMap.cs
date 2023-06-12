@@ -1,13 +1,15 @@
 ﻿using ApiDotNet.Domain.Entities;
+using ApiDotNet.Infra.Data.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ApiDotNet.Infra.Data.Maps
 {
-    public class PersonMap : IEntityTypeConfiguration<Person>
+    public class PersonMap : BaseMapping<Person>
     {
-        public void Configure(EntityTypeBuilder<Person> builder)
+        public override void Configure(EntityTypeBuilder<Person> builder)
         {
+            base.Configure(builder);
             builder.ToTable("pessoa");
 
             builder.HasKey(c => c.Id);

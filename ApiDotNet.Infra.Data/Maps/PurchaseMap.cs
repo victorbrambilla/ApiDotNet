@@ -1,13 +1,15 @@
 ﻿using ApiDotNet.Domain.Entities;
+using ApiDotNet.Infra.Data.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ApiDotNet.Infra.Data.Maps
 {
-    public class PurchaseMap : IEntityTypeConfiguration<Purchase>
+    public class PurchaseMap : BaseMapping<Purchase>
     {
-        public void Configure(EntityTypeBuilder<Purchase> builder)
+        public override void Configure(EntityTypeBuilder<Purchase> builder)
         {
+            base.Configure(builder);
             builder.ToTable("compra");
 
             builder.HasKey(x => x.Id);

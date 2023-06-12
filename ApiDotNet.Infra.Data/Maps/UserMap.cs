@@ -1,13 +1,15 @@
 ﻿using ApiDotNet.Domain.Entities;
+using ApiDotNet.Infra.Data.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ApiDotNet.Infra.Data.Maps
 {
-    public class UserMap : IEntityTypeConfiguration<User>
+    public class UserMap : BaseMapping<User>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public override void Configure(EntityTypeBuilder<User> builder)
         {
+            base.Configure(builder);
             builder.ToTable("usuario");
 
             builder.HasKey(x => x.Id);

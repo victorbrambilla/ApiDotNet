@@ -1,13 +1,15 @@
 ﻿using ApiDotNet.Domain.Entities;
+using ApiDotNet.Infra.Data.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ApiDotNet.Infra.Data.Maps
 {
-    public class ProductMap : IEntityTypeConfiguration<Product>
+    public class ProductMap : BaseMapping<Product>
     {
-        public void Configure(EntityTypeBuilder<Product> builder)
+        public override void Configure(EntityTypeBuilder<Product> builder)
         {
+            base.Configure(builder);
             builder.ToTable("produto");
 
             builder.HasKey(x => x.Id);

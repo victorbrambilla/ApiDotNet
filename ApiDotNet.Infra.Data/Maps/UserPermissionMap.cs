@@ -1,4 +1,5 @@
 ﻿using ApiDotNet.Domain.Entities;
+using ApiDotNet.Infra.Data.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -9,11 +10,13 @@ using System.Threading.Tasks;
 
 namespace ApiDotNet.Infra.Data.Maps
 {
-    public class UserPermissionMap : IEntityTypeConfiguration<UserPermission>
+    public class UserPermissionMap : BaseMapping<UserPermission>
     {
-        public void Configure(EntityTypeBuilder<UserPermission> builder)
+        public override void Configure(EntityTypeBuilder<UserPermission> builder)
         {
+            base.Configure(builder);
             builder.ToTable("permissaousuario");
+
             builder.HasKey(c => c.Id);
 
             builder.Property(c => c.Id)
