@@ -13,8 +13,8 @@ namespace ApiDotNet.Infra.Data.Common
         public virtual void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<T> builder)
         {
             builder.Property(x => x.IsDeleted).HasDefaultValue(false);
-            builder.Property(x => x.CreatedAt).HasDefaultValue(DateTime.Now);
-            builder.Property(x => x.UpdatedAt).HasDefaultValue(null);
+            builder.Property(x => x.CreatedAt).HasDefaultValue(DateTime.UtcNow);
+            builder.Property(x => x.UpdatedAt).HasDefaultValue(DateTime.UtcNow);
             builder.Property(x => x.DeletedAt).HasDefaultValue(null);
         }
     }
