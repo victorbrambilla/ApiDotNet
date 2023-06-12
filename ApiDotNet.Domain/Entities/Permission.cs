@@ -1,8 +1,9 @@
-﻿using ApiDotNet.Domain.Validation;
+﻿using ApiDotNet.Domain.Common;
+using ApiDotNet.Domain.Validation;
 
 namespace ApiDotNet.Domain.Entities
 {
-    public sealed class Permission
+    public sealed class Permission : BaseEntity
     {
         public int Id { get; set; }
         public string VisualName { get; set; }

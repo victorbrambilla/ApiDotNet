@@ -1,8 +1,9 @@
-﻿using ApiDotNet.Domain.Validation;
+﻿using ApiDotNet.Domain.Common;
+using ApiDotNet.Domain.Validation;
 
 namespace ApiDotNet.Domain.Entities
 {
-    public sealed class Product
+    public sealed class Product : BaseEntity
     {
         public int Id { get; private set; }
         public string Name { get; private set; }

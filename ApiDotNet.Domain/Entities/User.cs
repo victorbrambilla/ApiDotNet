@@ -1,8 +1,9 @@
-﻿using ApiDotNet.Domain.Validation;
+﻿using ApiDotNet.Domain.Common;
+using ApiDotNet.Domain.Validation;
 
 namespace ApiDotNet.Domain.Entities
 {
-    public class User
+    public class User : BaseEntity
     {
         public int Id { get; private set; }
         public string Email { get; private set; }

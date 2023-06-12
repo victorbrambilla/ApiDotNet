@@ -1,8 +1,9 @@
-﻿using ApiDotNet.Domain.Validation;
+﻿using ApiDotNet.Domain.Common;
+using ApiDotNet.Domain.Validation;
 
 namespace ApiDotNet.Domain.Entities
 {
-    public sealed class Person
+    public sealed class Person : BaseEntity
     {
         public int Id { get; private set; }
         public string Name { get; private set; }
@@ -27,7 +28,7 @@ namespace ApiDotNet.Domain.Entities
             Purchases = new List<Purchase>();
         }
 
-        private void Validation(string document, string name, string phone,int userId)
+        private void Validation(string document, string name, string phone, int userId)
         {
             DomainValidationException.When(string.IsNullOrEmpty(document), "Documento deve ser informado!");
             DomainValidationException.When(string.IsNullOrEmpty(name), "Nome deve ser informado!");

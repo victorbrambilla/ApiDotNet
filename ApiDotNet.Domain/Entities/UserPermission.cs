@@ -1,4 +1,5 @@
-﻿using ApiDotNet.Domain.Validation;
+﻿using ApiDotNet.Domain.Common;
+using ApiDotNet.Domain.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ApiDotNet.Domain.Entities
 {
-    public sealed class UserPermission
+    public sealed class UserPermission : BaseEntity
     {
         public int Id { get; set; }
         public int UserId { get; set; }

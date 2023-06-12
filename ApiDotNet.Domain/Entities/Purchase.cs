@@ -1,8 +1,9 @@
-﻿using ApiDotNet.Domain.Validation;
+﻿using ApiDotNet.Domain.Common;
+using ApiDotNet.Domain.Validation;
 
 namespace ApiDotNet.Domain.Entities
 {
-    public class Purchase
+    public class Purchase : BaseEntity
     {
         public int Id { get; private set; }
         public int ProductId { get; private set; }
