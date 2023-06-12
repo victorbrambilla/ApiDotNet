@@ -4,6 +4,12 @@ namespace ApiDotNet.Domain.Entities
 {
     public class User
     {
+        public int Id { get; private set; }
+        public string Email { get; private set; }
+        public string Password { get; private set; }
+        public int? PersonId { get; private set; }
+        public Person? Person { get; private set; }
+
         public User(string email, string password)
         {
             Validation(email, password);
@@ -17,12 +23,6 @@ namespace ApiDotNet.Domain.Entities
             Validation(email, password);
             UserPermissions = new List<UserPermission>();
         }
-
-        public int Id { get; private set; }
-        public string Email { get; private set; }
-        public string Password { get; private set; }
-        public int? PersonId { get; private set; }
-        public Person? Person { get; private set; }
 
         public ICollection<UserPermission> UserPermissions { get; set; }
 

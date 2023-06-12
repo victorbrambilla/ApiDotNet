@@ -10,11 +10,6 @@ namespace ApiDotNet.Domain.Entities
 {
     public sealed class UserPermission
     {
-        public UserPermission(int userId, int permissionId)
-        {
-            Validation(userId, permissionId);
-        }
-
         public int Id { get; set; }
         public int UserId { get; set; }
         public int PermissionId { get; set; }
@@ -22,6 +17,11 @@ namespace ApiDotNet.Domain.Entities
         public User User { get; set; }
 
         public Permission Permission { get; set; }
+
+        public UserPermission(int userId, int permissionId)
+        {
+            Validation(userId, permissionId);
+        }
 
         private void Validation(int userId, int permissionId)
         {
