@@ -9,36 +9,23 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 using System.Threading.Tasks;
+using ApiDotNet.Infra.Data.Common;
 
 namespace ApiDotNet.Infra.Data.Repositories
 {
-    public class UserPermissionRepository : IUserPermissionRepository
+    public class UserPermissionRepository : BaseRepository<UserPermission>, IUserPermissionRepository
 
     {
-        private readonly ApplicationDbContext _db;
-
-        public UserPermissionRepository(ApplicationDbContext db)
+        public UserPermissionRepository(ApplicationDbContext db) : base(db)
         {
-            _db = db;
         }
 
-        public async Task DeletePermissionAsync(UserPermission userPermission)
-        {
-            _db.Remove(userPermission);
-            await _db.SaveChangesAsync();
-        }
-
-        public async Task<ICollection<UserPermission>> GetAllAsync()
+        public override async Task<ICollection<UserPermission>> GetAllAsync()
         {
             return await _db.UserPermissions
                 .Include(x => x.Permission)
                 .Include(x => x.User)
                 .ToListAsync();
-        }
-
-        public async Task<UserPermission> GetByIdAsync(int id)
-        {
-            return await _db.UserPermissions.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<ICollection<UserPermission>> GetByUserId(int id)

@@ -23,12 +23,12 @@ namespace ApiDotNet.Application.Services
 
         public async Task<ResultService> DeleteAsync(int id)
         {
-            var data = await _userPermissionRepository.GetByIdAsync(id);
+            var data = await _userPermissionRepository.GetAsync(id);
             if (data == null)
             {
                 return ResultService.Fail("Permissão não encontrada");
             }
-            await _userPermissionRepository.DeletePermissionAsync(data);
+            await _userPermissionRepository.DeleteAsync(data);
             return ResultService.Ok("Permissão deletada");
         }
 

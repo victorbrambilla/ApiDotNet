@@ -7,14 +7,10 @@ using System.Threading.Tasks;
 
 namespace ApiDotNet.Domain.Repositories
 {
-    public interface IUserPermissionRepository
+    public interface IUserPermissionRepository : IBaseRepository<UserPermission>
     {
-        Task<ICollection<UserPermission>> GetAllAsync();
+        new Task<ICollection<UserPermission>> GetAllAsync();
 
         Task<ICollection<UserPermission>> GetByUserId(int id);
-
-        Task DeletePermissionAsync(UserPermission userPermission);
-
-        Task<UserPermission> GetByIdAsync(int id);
     }
 }
