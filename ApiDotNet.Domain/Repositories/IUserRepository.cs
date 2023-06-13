@@ -2,11 +2,9 @@
 
 namespace ApiDotNet.Domain.Repositories
 {
-    public interface IUserRepository
+    public interface IUserRepository : IBaseRepository<User>
     {
         Task<User?> GetUserByEmailAsync(string email);
-
-        Task<User> CreateUser(User user);
 
         Task<User?> GetUserByIdAsync(int id);
     }

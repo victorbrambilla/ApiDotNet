@@ -45,7 +45,7 @@ namespace ApiDotNet.Application.Services
             userDTO.Password = _hashing.UseArgon2(userDTO.Password);
             var userCreated = _mapper.Map<User>(userDTO);
 
-            var data = await _userRepository.CreateUser(userCreated);
+            var data = await _userRepository.CreateAsync(userCreated);
             return ResultService.Ok<UserDTO>(_mapper.Map<UserDTO>(data));
         }
 
