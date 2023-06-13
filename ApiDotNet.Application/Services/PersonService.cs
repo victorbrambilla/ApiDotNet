@@ -47,7 +47,7 @@ namespace ApiDotNet.Application.Services
 
         public async Task<ResultService> DeleteAsync(int id)
         {
-            var data = await _personRepository.GetByIdAsync(id);
+            var data = await _personRepository.GetAsync(id);
             if (data == null)
             {
                 return ResultService.Fail("Pessoa não encontrada");
@@ -58,13 +58,13 @@ namespace ApiDotNet.Application.Services
 
         public async Task<ResultService<ICollection<PersonDTO>>> GetAllAsync()
         {
-            var data = await _personRepository.GetPeopleAsync();
+            var data = await _personRepository.GetAllAsync();
             return ResultService.Ok<ICollection<PersonDTO>>(_mapper.Map<ICollection<PersonDTO>>(data));
         }
 
         public async Task<ResultService<PersonDTO>> GetByIdAsync(int id)
         {
-            var data = await _personRepository.GetByIdAsync(id);
+            var data = await _personRepository.GetAsync(id);
             if (data == null)
             {
                 return ResultService.Fail<PersonDTO>("Pessoa não encontrada");
@@ -93,7 +93,7 @@ namespace ApiDotNet.Application.Services
                 return ResultService.RequestError("Problemas de validação!", result);
             }
 
-            var person = await _personRepository.GetByIdAsync(personDTO.Id);
+            var person = await _personRepository.GetAsync(personDTO.Id);
             if (person == null)
             {
                 return ResultService.Fail("Pessoa não encontrada");
