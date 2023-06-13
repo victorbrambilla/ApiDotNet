@@ -2,17 +2,11 @@
 
 namespace ApiDotNet.Domain.Repositories
 {
-    public interface IPurchaseRepository
+    public interface IPurchaseRepository : IBaseRepository<Purchase>
     {
         Task<Purchase> GetByIdAsync(int id);
 
-        Task<ICollection<Purchase>> GetAllAsync();
-
-        Task<Purchase> CreateAsync(Purchase purchase);
-
-        Task UpdateAsync(Purchase purchase);
-
-        Task DeleteAsync(Purchase purchase);
+        new Task<ICollection<Purchase>> GetAllAsync();
 
         Task<ICollection<Purchase>> GetByPersonIdAsync(int personId);
 

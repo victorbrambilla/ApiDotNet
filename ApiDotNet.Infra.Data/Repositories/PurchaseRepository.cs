@@ -1,36 +1,15 @@
 ﻿using ApiDotNet.Domain.Entities;
 using ApiDotNet.Domain.Repositories;
+using ApiDotNet.Infra.Data.Common;
 using ApiDotNet.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace ApiDotNet.Infra.Data.Repositories
 {
-    public class PurchaseRepository : IPurchaseRepository
+    public class PurchaseRepository : BaseRepository<Purchase>, IPurchaseRepository
     {
-        private readonly ApplicationDbContext _db;
-
-        public PurchaseRepository(ApplicationDbContext db)
+        public PurchaseRepository(ApplicationDbContext db) : base(db)
         {
-            _db = db;
-        }
-
-        public async Task<Purchase> CreateAsync(Purchase purchase)
-        {
-            _db.Add(purchase);
-            await _db.SaveChangesAsync();
-            return purchase;
-        }
-
-        public async Task DeleteAsync(Purchase purchase)
-        {
-            _db.Remove(purchase);
-            await _db.SaveChangesAsync();
-        }
-
-        public async Task UpdateAsync(Purchase purchase)
-        {
-            _db.Update(purchase);
-            await _db.SaveChangesAsync();
         }
 
         public async Task<Purchase> GetByIdAsync(int id)
@@ -61,7 +40,7 @@ namespace ApiDotNet.Infra.Data.Repositories
                             .ToListAsync();
         }
 
-        public async Task<ICollection<Purchase>> GetAllAsync()
+        public override async Task<ICollection<Purchase>> GetAllAsync()
         {
             return await _db.Purchases
                             .Include(x => x.Product)
