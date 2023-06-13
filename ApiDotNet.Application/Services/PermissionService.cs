@@ -35,30 +35,30 @@ namespace ApiDotNet.Application.Services
                 return ResultService.RequestError<PermissionDTO>("Problemas de validação!", validate);
             }
             var permission = _mapper.Map<Permission>(permissionDTO);
-            var data = await _permissionRepository.CreatePermissionAsync(permission);
+            var data = await _permissionRepository.CreateAsync(permission);
             return ResultService.Ok<PermissionDTO>(_mapper.Map<PermissionDTO>(data));
         }
 
         public async Task<ResultService> DeleteAsync(int id)
         {
-            var data = await _permissionRepository.GetByIdAsync(id);
+            var data = await _permissionRepository.GetAsync(id);
             if (data == null)
             {
                 return ResultService.Fail("Permissão não encontrada");
             }
-            await _permissionRepository.DeletePermissionAsync(data);
+            await _permissionRepository.DeleteAsync(data);
             return ResultService.Ok("Permissão deletada");
         }
 
         public async Task<ResultService<ICollection<PermissionDTO>>> GetAllAsync()
         {
-            var data = await _permissionRepository.GetAllPermissionsAsync();
+            var data = await _permissionRepository.GetAllAsync();
             return ResultService.Ok<ICollection<PermissionDTO>>(_mapper.Map<ICollection<PermissionDTO>>(data));
         }
 
         public async Task<ResultService<PermissionDTO>> GetByIdAsync(int id)
         {
-            var data = await _permissionRepository.GetByIdAsync(id);
+            var data = await _permissionRepository.GetAsync(id);
             if (data == null)
             {
                 return ResultService.Fail<PermissionDTO>("Permissão não encontrada");
@@ -78,14 +78,14 @@ namespace ApiDotNet.Application.Services
                 return ResultService.RequestError("Problemas de validação!", validate);
             }
 
-            var data = await _permissionRepository.GetByIdAsync(permissionDTO.Id);
+            var data = await _permissionRepository.GetAsync(permissionDTO.Id);
             if (data == null)
             {
                 return ResultService.Fail("Permissão não encontrada");
             }
 
             var permission = _mapper.Map<PermissionDTO, Permission>(permissionDTO, data);
-            await _permissionRepository.UpdatePermissionAsync(permission);
+            await _permissionRepository.UpdateAsync(permission);
             return ResultService.Ok("Permissão atualizada");
         }
     }

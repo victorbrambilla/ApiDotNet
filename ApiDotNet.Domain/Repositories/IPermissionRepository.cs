@@ -7,17 +7,7 @@ using System.Threading.Tasks;
 
 namespace ApiDotNet.Domain.Repositories
 {
-    public interface IPermissionRepository
+    public interface IPermissionRepository : IBaseRepository<Permission>
     {
-        Task<ICollection<Permission>> GetAllPermissionsAsync();
-
-        Task<Permission> CreatePermissionAsync(Permission permission);
-
-        Task<Permission> GetByIdAsync(int id);
-
-        Task<Permission> UpdatePermissionAsync(
-            Permission permission);
-
-        Task DeletePermissionAsync(Permission permission);
     }
 }
