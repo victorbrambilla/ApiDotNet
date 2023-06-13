@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ApiDotNet.Api.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
@@ -17,6 +16,7 @@ namespace ApiDotNet.Api.Controllers
             _productService = productService;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] ProductDTO productDTO)
         {
@@ -50,6 +50,7 @@ namespace ApiDotNet.Api.Controllers
             return BadRequest(result);
         }
 
+        [Authorize]
         [HttpPut]
         public async Task<ActionResult> Put([FromBody] ProductDTO productDTO)
         {
@@ -61,6 +62,7 @@ namespace ApiDotNet.Api.Controllers
             return BadRequest(result);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

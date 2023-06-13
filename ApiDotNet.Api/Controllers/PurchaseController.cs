@@ -2,10 +2,12 @@
 using ApiDotNet.Application.Services;
 using ApiDotNet.Application.Services.Interfaces;
 using ApiDotNet.Domain.Validation;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiDotNet.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class PurchaseController : ControllerBase
