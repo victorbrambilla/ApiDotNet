@@ -13,8 +13,6 @@ namespace ApiDotNet.Infra.Data.Repositories
 {
     public class PermissionRepository : BaseRepository<Permission>, IPermissionRepository
     {
-        private readonly ApplicationDbContext _db;
-
         public PermissionRepository(ApplicationDbContext db) : base(db)
         {
         }

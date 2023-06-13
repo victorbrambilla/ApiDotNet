@@ -40,7 +40,7 @@ namespace ApiDotNet.Application.Services
 
         public async Task<ResultService<ProductDTO>> DeleteAsync(int id)
         {
-            var product = await _productRepository.GetByIdAsync(id);
+            var product = await _productRepository.GetAsync(id);
             if (product == null)
             {
                 return ResultService.Fail<ProductDTO>("Produto não encontrado");
@@ -51,13 +51,13 @@ namespace ApiDotNet.Application.Services
 
         public async Task<ResultService<ICollection<ProductDTO>>> GetAllAsync()
         {
-            var products = await _productRepository.GetProductsAsync();
+            var products = await _productRepository.GetAllAsync();
             return ResultService.Ok<ICollection<ProductDTO>>(_mapper.Map<ICollection<ProductDTO>>(products));
         }
 
         public async Task<ResultService<ProductDTO>> GetByIdAsync(int id)
         {
-            var product = await _productRepository.GetByIdAsync(id);
+            var product = await _productRepository.GetAsync(id);
             if (product == null)
             {
                 return ResultService.Fail<ProductDTO>("Produto não encontrado");
@@ -78,7 +78,7 @@ namespace ApiDotNet.Application.Services
                 return ResultService.RequestError<ProductDTO>("Problemas de validação!", result);
             }
 
-            var product = await _productRepository.GetByIdAsync(productDTO.Id);
+            var product = await _productRepository.GetAsync(productDTO.Id);
             if (product == null)
             {
                 return ResultService.Fail<ProductDTO>("Produto não encontrado");
