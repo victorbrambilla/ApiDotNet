@@ -1,12 +1,12 @@
 # ApiDotNet Clean Architecture
 
-O projeto ApiDotNet é uma aplicação desenvolvida em .NET 7 com Clean Architecture. Ele consiste em uma API que segue as boas práticas de organização de pastas e separação de responsabilidades.
+O projeto ApiDotNet é uma aplicação desenvolvida em .NET 6 com Clean Architecture. Ele consiste em uma API que segue as boas práticas de organização de pastas e separação de responsabilidades.
 
 ## Pré-requisitos
 
 Antes de configurar e executar o projeto, verifique se o seguinte software está instalado no seu ambiente de desenvolvimento:
 
-- [.NET 7 SDK](https://dotnet.microsoft.com/download/dotnet/7.0)
+- [.NET 6 SDK](https://dotnet.microsoft.com/download/dotnet/6.0)
 - [PostgreSQL](https://www.postgresql.org/)
 
 ## Configuração do Ambiente
